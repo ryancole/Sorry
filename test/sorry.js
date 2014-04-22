@@ -4,8 +4,4 @@ var sorry = require('../build/release/sorry');
 console.log(sorry);
 
 // call methods
-console.log(sorry.EnumWindows(function (handle) {
-
-    console.log(handle);
-
-}));
+console.log(sorry.EnumWindows());
