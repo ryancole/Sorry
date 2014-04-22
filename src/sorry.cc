@@ -8,10 +8,10 @@ using namespace v8;
 BOOL CALLBACK EnumWindowsProc(HWND hWnd, LPARAM lParam)
 {
     // cast the collection of handles
-    std::vector<HWND>* handles = reinterpret_cast<std::vector<HWND>*>(lParam);
+    std::vector<int>* handles = reinterpret_cast<std::vector<int>*>(lParam);
 
     // add hwnd to collection
-    handles->push_back(hWnd);
+    handles->push_back((int)hWnd);
 
     return true;
 }
@@ -20,7 +20,7 @@ Handle<Value> EnumWindows(const Arguments& args)
 {
     HandleScope scope;
 
-    std::vector<HWND> handles;
+    std::vector<int> handles;
 
     // populate handles collection
     if (EnumWindows(EnumWindowsProc, reinterpret_cast<LPARAM>(&handles)))
@@ -30,7 +30,7 @@ Handle<Value> EnumWindows(const Arguments& args)
 
         for (unsigned int x = 0; x < handles.size(); x++)
         {
-            result->Set(Number::New(x), Number::New((int)handles[x]));
+            result->Set(Number::New(x), Number::New(handles[x]));
         }
 
         return scope.Close(result);
