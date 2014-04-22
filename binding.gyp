@@ -2,7 +2,7 @@
   "targets": [
     {
       "target_name": "sorry",
-      "sources": [ "src/sorry.cc" ]
+      "sources": [ "src/main.cc", "src/sorry.cc" ]
     }
   ]
 }
