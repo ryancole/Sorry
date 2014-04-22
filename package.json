@@ -1,0 +1,16 @@
+{
+  "name": "Sorry",
+  "version": "0.0.1",
+  "description": "I am so sorry.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "node test/sorry.js",
+    "install": "node-gyp rebuild"
+  },
+  "author": "Ryan Cole",
+  "license": "MIT",
+  "gypfile": true
+}
