@@ -3,6 +3,34 @@
 
 using namespace v8;
 
+Handle<Value> MyFindWindow(const Arguments& args)
+{
+    HandleScope scope;
+
+    // paramater validation
+    if (args.Length() != 2 || 
+        args[0]->IsString() == false ||
+        args[1]->IsString() == false)
+    {
+        ThrowException(Exception::SyntaxError(String::New("expected two string parameters")));
+        return scope.Close(Undefined());
+    }
+
+    // get parameters
+    String::Utf8Value classname (args[0]->ToString());
+    String::Utf8Value windowname (args[1]->ToString());
+
+    // find the window
+    auto result = FindWindow(*classname, *windowname);
+
+    if (result != NULL)
+    {
+        return scope.Close(Uint32::New((int)result));
+    }
+
+    return scope.Close(Undefined());
+}
+
 Handle<Value> MyEnumWindows(const Arguments& args)
 {
     HandleScope scope;

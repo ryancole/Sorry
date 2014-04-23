@@ -1,9 +1,13 @@
 var sorry = require('../build/release/sorry');
 
-// get available windows
-var windows = sorry.EnumWindows();
+// locate task bar
+var taskbar = sorry.FindWindow("Shell_TrayWnd", "");
 
-windows.forEach(function (window) {
+// get taskbar dimensions
+var taskbarDimensions = sorry.GetWindowRect(taskbar);
+
+// enumerate over all windows
+sorry.EnumWindows().forEach(function (window) {
 
     var GWL_STYLE = -16;
     var WS_CAPTION = 12582912;
@@ -35,8 +39,11 @@ function centerWindow(window)
     // get resolution details for the monitor
     var resolution = sorry.GetMonitorInfo(monitor);
 
+    // taskbar resolution difference
+    var taskbarHeight = taskbarDimensions.bottom - taskbarDimensions.top;
+
     // calculate the new window position
-    var top = Math.floor(resolution.monitor.top + (resolution.monitor.bottom - resolution.monitor.top - height) / 2);
+    var top = Math.floor(resolution.monitor.top + ((resolution.monitor.bottom - taskbarHeight) - resolution.monitor.top - height) / 2);
     var left = Math.floor(resolution.monitor.left + (resolution.monitor.right - resolution.monitor.left - width) / 2);
 
     // set window position

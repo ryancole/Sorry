@@ -6,6 +6,10 @@ using namespace v8;
 
 void Initialize(Handle<Object> exports)
 {
+    // find window api
+    exports->Set(String::NewSymbol("FindWindow"),
+                 FunctionTemplate::New(MyFindWindow)->GetFunction());
+
     // enum windows api
     exports->Set(String::NewSymbol("EnumWindows"),
                  FunctionTemplate::New(MyEnumWindows)->GetFunction());
