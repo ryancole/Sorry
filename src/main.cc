@@ -10,6 +10,18 @@ void Initialize(Handle<Object> exports)
     exports->Set(String::NewSymbol("EnumWindows"),
                  FunctionTemplate::New(MyEnumWindows)->GetFunction());
 
+    // set window position api
+    exports->Set(String::NewSymbol("SetWindowPos"),
+                 FunctionTemplate::New(MySetWindowPos)->GetFunction());
+
+    // get window long api
+    exports->Set(String::NewSymbol("GetWindowLong"),
+                 FunctionTemplate::New(MyGetWindowLong)->GetFunction());
+
+    // get window rect api
+    exports->Set(String::NewSymbol("GetWindowRect"),
+                 FunctionTemplate::New(MyGetWindowRect)->GetFunction());
+
     // get monitor info api
     exports->Set(String::NewSymbol("GetMonitorInfo"),
                  FunctionTemplate::New(MyGetMonitorInfo)->GetFunction());
