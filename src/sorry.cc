@@ -51,7 +51,7 @@ Handle<Value> MySetWindowPos(const Arguments& args)
     auto result = SetWindowPos(window, NULL, x, y, 0, 0, SWP_NOSIZE | SWP_NOZORDER | SWP_NOACTIVATE);
 
     // return result of SetWindowPos
-    return scope.Close(Boolean::New(result));
+    return scope.Close(Boolean::New(result == 1));
 }
 
 Handle<Value> MyGetWindowLong(const Arguments& args)
